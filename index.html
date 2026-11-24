@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>خلف الشاشة | BEHIND THE SCREEN</title>
+<meta name="description" content="رحلة تفاعلية في عالم الإنترنت ومواقع الويب">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#23344D;--off:#F7F8FA;--gray:#EEF1F5;--blue:#8BAFD0;--teal:#72AAA4;--gold:#D5B77A;--txt:#3F4650}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:18px/1.8 Cairo,Tajawal,system-ui,sans-serif;color:var(--txt);background:var(--off)}
+h1,h2,h3{color:var(--navy);line-height:1.3;margin:0 0 .5em}h2{font-size:clamp(28px,5vw,40px)}
+a,button{font-family:inherit}:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1050px;margin:auto;padding:0 20px}section{padding:72px 0}section.alt{background:var(--gray)}
+.lead{max-width:680px;margin-bottom:28px}.eyebrow{color:#4f857f;font-weight:800;font-size:16px}
+.card{background:#fff;border-radius:20px;padding:22px;box-shadow:0 6px 24px rgba(35,52,77,.08)}
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 26px;font-size:18px;font-weight:800;cursor:pointer;background:var(--gold);color:var(--navy);text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}.btn.ghost{background:transparent;color:var(--off);border:2px solid var(--blue)}.btn.navy{background:var(--navy);color:var(--off)}
+nav{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(247,248,250,.78);backdrop-filter:blur(12px);box-shadow:0 2px 14px rgba(35,52,77,.08)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}nav b{color:var(--navy);font-size:20px}
+nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}nav a{color:var(--navy);text-decoration:none;font-weight:600;font-size:16px}
+#menuBtn{display:none;background:none;border:0;font-size:28px;color:var(--navy);cursor:pointer}
+@media(max-width:860px){#menuBtn{display:block}nav ul{display:none;position:absolute;top:60px;inset-inline:0;flex-direction:column;background:var(--off);padding:16px 20px}nav ul.open{display:flex}}
+#hero{position:relative;min-height:100svh;background:var(--navy);color:var(--off);display:flex;align-items:center;overflow:hidden;padding:90px 0 60px}
+#net{position:absolute;inset:0;width:100%;height:100%}#hero .wrap{position:relative}
+#hero h1{color:var(--off);font-size:clamp(34px,7vw,68px);font-weight:800}#hero p{font-size:clamp(18px,3vw,24px);color:var(--blue);max-width:620px}
+.hero-in>*{animation:up .8s both}.hero-in>*:nth-child(2){animation-delay:.15s}.hero-in>*:nth-child(3){animation-delay:.3s}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.scroll{position:absolute;bottom:20px;left:50%;color:var(--gold);font-size:30px;animation:bob 1.8s infinite}@keyframes bob{50%{transform:translateY(8px)}}
+.tl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}.tl button,.tabs button{border:2px solid var(--blue);background:#fff;color:var(--navy);border-radius:14px;padding:10px 16px;font-weight:800;cursor:pointer;font-size:17px}
+.tl button[aria-pressed=true],.tabs button[aria-pressed=true]{background:var(--navy);color:var(--off);border-color:var(--navy)}
+#tlOut{display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:center}#tlOut .ic{font-size:72px;text-align:center}
+@media(max-width:600px){#tlOut{grid-template-columns:1fr}}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}@media(max-width:700px){.flow{grid-template-columns:repeat(2,1fr)}}
+.node{background:#fff;border-radius:16px;padding:14px;text-align:center;font-weight:600;font-size:16px;border:2px solid transparent;transition:.4s;position:relative}
+.node span{display:block;font-size:30px}.node.on{border-color:var(--gold);background:#fff8e8;transform:scale(1.05)}.node.done{border-color:var(--teal)}
+.node.on::after{content:"●";position:absolute;top:-10px;left:50%;color:var(--gold);animation:bob 1s infinite}
+#jText{min-height:90px;border-radius:16px;background:var(--navy);color:var(--off);padding:16px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.tile{cursor:pointer;border:0;text-align:right;font-size:17px;color:var(--txt);transition:.25s}.tile:hover{transform:translateY(-4px)}.tile b{display:block;color:var(--navy);font-size:21px}
+.tile[aria-expanded=true]{outline:3px solid var(--teal)}.more{display:none;margin-top:10px;font-size:16px}.tile[aria-expanded=true] .more{display:block}
+#demo{border-radius:16px;background:#fff;padding:20px;margin-top:14px;min-height:150px;transition:.3s}
+#demo .t{font-weight:400}#demo.css{background:var(--navy);color:var(--off);font-family:Cairo;text-align:center}#demo.css .t{font-weight:800;font-size:26px;color:var(--gold)}
+#demo button{padding:8px 18px;border-radius:999px;border:1px solid #888;background:#eee;cursor:pointer;font-size:17px}#demo.css button{background:var(--gold);border:0;font-weight:800;color:var(--navy)}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.cmp .card h3{margin-bottom:.2em}.note{background:#f6ecd4;border-radius:14px;padding:12px 16px;margin-top:16px;font-size:16px}
+.msg{background:#fff;border-radius:18px;padding:20px;border:1px solid #dde3ea}.msg .from{font-size:15px;color:#667}.msg q{display:block;font-size:19px;color:var(--navy);margin:8px 0;quotes:none}
+.link{direction:ltr;display:inline-block;background:var(--gray);padding:2px 10px;border-radius:8px;font-size:16px}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.fb{margin-top:14px;padding:14px;border-radius:14px;display:none}.fb.ok{background:#e1f0ee;display:block}.fb.bad{background:#f6ecd4;display:block}
+.bar{height:10px;background:#dde3ea;border-radius:9px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .4s}
+.opts{display:grid;gap:10px;margin:14px 0}.opt{text-align:right;background:#fff;border:2px solid var(--blue);border-radius:14px;padding:12px 16px;font-size:18px;cursor:pointer;color:var(--txt)}
+.opt:hover:not(:disabled){background:var(--gray)}.opt.right{background:#e1f0ee;border-color:var(--teal)}.opt.wrong{background:#f6ecd4;border-color:var(--gold)}
+.vid{padding:0;overflow:hidden;cursor:pointer;border:0;text-align:right;font-size:16px;color:var(--txt)}
+.th{height:150px;background:var(--navy);display:grid;place-items:center;color:var(--gold);font-size:48px;position:relative}.th small{position:absolute;bottom:8px;left:12px;color:var(--off);font-size:14px}.vid div.b{padding:14px}.vid b{color:var(--navy);font-size:18px}
+dialog{border:0;border-radius:20px;padding:20px;width:min(760px,94vw)}dialog::backdrop{background:rgba(35,52,77,.7)}dialog iframe,dialog video{width:100%;aspect-ratio:16/9;border:0;border-radius:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:640px){.two{grid-template-columns:1fr}}
+.big{font-size:clamp(26px,5vw,42px);font-weight:800;color:var(--navy);text-align:center;margin:36px 0 0}
+#toTop{position:fixed;bottom:18px;left:18px;width:48px;height:48px;border-radius:50%;border:0;background:var(--navy);color:var(--off);font-size:22px;cursor:pointer;display:none;z-index:40}
+#toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--navy);color:var(--off);padding:10px 20px;border-radius:999px;display:none;z-index:60}
+footer{background:var(--navy);color:var(--off);text-align:center;padding:36px 20px}footer a{color:var(--gold)}
+#qr{background:#fff;padding:10px;display:inline-block;border-radius:12px}#qrIn{direction:ltr;padding:8px;border-radius:10px;border:1px solid #bbb;width:min(360px,90%);font-size:16px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media print{nav,#hero,section:not(#summary),footer,#toTop,.noprint{display:none!important}#summary{padding:0}body{font-size:14px;background:#fff}.card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><b>خلف الشاشة</b><button id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
+<ul id="menu"><li><a href="#timeline">التاريخ</a></li><li><a href="#journey">الرحلة</a></li><li><a href="#parts">المكونات</a></li><li><a href="#evolution">الويب</a></li><li><a href="#security">الأمان</a></li><li><a href="#quiz">اختبار</a></li><li><a href="#videos">فيديوهات</a></li><li><a href="#balance">التوازن</a></li><li><a href="#summary">الملخص</a></li></ul></div></nav>
+
+<header id="hero"><canvas id="net" aria-hidden="true"></canvas><div class="wrap hero-in">
+<p class="eyebrow" style="color:var(--gold)">BEHIND THE SCREEN</p><h1>إيه اللي بيحصل خلف الشاشة؟</h1>
+<p>رحلة نكتشف فيها العالم اللي بنستخدمه كل يوم… من غير ما نشوفه.</p>
+<div class="row"><a class="btn" href="#timeline">ابدأ الرحلة</a><a class="btn ghost" href="#quiz">اختبر معلوماتك</a></div></div><div class="scroll" aria-hidden="true">⌄</div></header>
+
+<main>
+<section id="timeline"><div class="wrap"><span class="eyebrow">١ · التاريخ</span><h2>رحلة الإنترنت</h2><p class="lead">اضغط على أي محطة وشوف إيه اللي حصل.</p>
+<div class="tl" id="tlBtns" role="group" aria-label="محطات التاريخ"></div><div class="card" id="tlOut" aria-live="polite"></div></div></section>
+
+<section id="journey" class="alt"><div class="wrap"><span class="eyebrow">٢ · اكتشف ما وراء الموقع</span><h2>لما تفتح موقع… إيه اللي بيحصل؟</h2>
+<button class="btn navy" id="play">شغّل التجربة</button><div class="flow" id="flow"></div><div id="jText" aria-live="polite">اضغط «شغّل التجربة» وتابع رحلة الطلب خطوة بخطوة.</div></div></section>
+
+<section id="parts"><div class="wrap"><span class="eyebrow">٣ · مكونات الموقع</span><h2>الموقع متركّب من إيه؟</h2><p class="lead">اضغط على أي كارت.</p><div class="grid" id="partsGrid"></div>
+<h3 style="margin-top:36px">جرّب بنفسك: صفحة واحدة بثلاث طبقات</h3><div class="tabs row" role="group" aria-label="طبقات الصفحة">
+<button aria-pressed="true" data-l="1">HTML فقط</button><button aria-pressed="false" data-l="2">HTML + CSS</button><button aria-pressed="false" data-l="3">HTML + CSS + JavaScript</button></div>
+<div id="demo"><p class="t">مرحبًا بك في موقعي</p><p>دي صفحة بسيطة: عنوان وفقرة وزر.</p><button id="demoBtn">اضغط هنا</button><p id="demoOut" aria-live="polite"></p></div></div></section>
+
+<section id="evolution" class="alt"><div class="wrap"><span class="eyebrow">٤ · تطور الويب</span><h2>Web 1.0 · 2.0 · 3.0</h2><div class="cmp">
+<div class="card"><h3>Web 1.0</h3><p>تقريبًا من أول التسعينيات لأوائل الألفينات: صفحات ثابتة في الغالب، إنت بتقرا وتشوف بس.</p><p><b>أمثلة:</b> مواقع شخصية ودلائل بسيطة.</p></div>
+<div class="card"><h3>Web 2.0</h3><p>المستخدم بقى بيصنع المحتوى: تعليقات ومشاركة وشبكات اجتماعية.</p><p><b>أمثلة:</b> YouTube (2005)، Facebook (2004)، Instagram (2010).</p></div>
+<div class="card"><h3>Web 3.0 ؟</h3><p>أفكار متعددة: الويب الدلالي (بيانات تفهمها الآلات) واللامركزية (مثل البلوكتشين).</p><p><b>الفرق:</b> هنا نقرأ ونكتب ونفكر في مين المتحكم.</p></div></div>
+<div class="note">⚠️ Web 3.0 مصطلح بيُستخدم لأكتر من فكرة، مش مرحلة موحدة مكتملة أو متفق عليها بالكامل، وكتير منها لسه تجريبي أو محل جدل.</div></div></section>
+
+<section id="security"><div class="wrap"><span class="eyebrow">٥ · التحدي الأمني</span><h2>هل تقدر تكتشف الخدعة؟</h2>
+<p class="lead">رسائل تعليمية افتراضية. كل الروابط وهمية وغير قابلة للضغط، ومفيش أي بيانات بتتسجل.</p>
+<div class="msg" id="phMsg"></div><div class="row" id="phBtns"><button class="btn navy" data-a="safe">آمن ✅</button><button class="btn" data-a="sus">مشبوه ⚠️</button></div>
+<div class="fb" id="phFb" aria-live="polite"></div><div class="row"><button class="btn" id="phNext" style="display:none">التالي</button></div>
+<div class="card" style="margin-top:28px"><h3>قواعد الحماية الرقمية</h3><ol id="rules"></ol></div></div></section>
+
+<section id="quiz" class="alt"><div class="wrap"><span class="eyebrow">٦ · اختبر نفسك</span><h2>هل أنت فاهم خلف الشاشة؟</h2><div class="card" id="qBox"></div></div></section>
+
+<section id="videos"><div class="wrap"><span class="eyebrow">٧ · شاهد واكتشف</span><h2>الفيديوهات</h2><div class="grid" id="vGrid"></div></div></section>
+<dialog id="vDlg"><div id="vBody"></div><div class="row"><button class="btn navy" id="vClose">إغلاق</button></div></dialog>
+
+<section id="ai" class="alt"><div class="wrap"><span class="eyebrow">٨ · الذكاء الاصطناعي</span><h2>AI خلف الشاشة</h2><div class="grid">
+<div class="card"><h3>ما هو؟</h3><p>أنظمة بتتعلم من بيانات كتيرة عشان تتعرف على أنماط (Patterns) وتؤدي مهام.</p></div>
+<div class="card"><h3>التوصيات</h3><p>المنصات بتحلل اللي بتتفرج عليه وتتفاعل معاه وتقترح محتوى شبهه.</p></div>
+<div class="card"><h3>في التعليم</h3><p>شرح مبسط وأمثلة وتلخيص، كأداة مساعدة مش بديل عن التفكير.</p></div>
+<div class="card"><h3>حدوده</h3><p>ممكن يغلط ويبدو مقنع. راجع المعلومة من مصدر موثوق، ومفيش طريقة مضمونة 100% لمعرفة إن صورة أو نص من صنع AI.</p></div></div></div></section>
+
+<section id="balance"><div class="wrap"><span class="eyebrow">٩ · التوازن</span><h2>مين المتحكم؟ أنت ولا الشاشة؟</h2><div class="two">
+<div class="card"><h3>استخدام غير متوازن</h3><ul><li>تضييع الوقت</li><li>انشغال دائم بالإشعارات</li><li>إهمال العلاقات الحقيقية</li><li>تأجيل الأهداف</li></ul></div>
+<div class="card" style="background:var(--navy);color:var(--off)"><h3 style="color:var(--gold)">استخدام واعٍ</h3><ul><li>التعلم</li><li>التواصل</li><li>الإبداع</li><li>مساعدة الآخرين</li><li>تحقيق الأهداف</li></ul></div></div>
+<p class="big">كن أنت المتحكم في الشاشة، لا تجعل الشاشة تتحكم فيك.</p></div></section>
+
+<section id="summary" class="alt"><div class="wrap"><span class="eyebrow">١٠ · الملخص</span><h2>قبل ما تقفل الشاشة…</h2>
+<div class="grid"><div class="card"><h3>أهم 10 معلومات</h3><ol id="sum10"></ol></div><div class="card"><h3>مصطلحات أساسية</h3><dl id="terms"></dl></div></div>
+<div class="card" style="margin-top:18px"><h3>مصادر موثوقة</h3><ul><li><a href="https://home.cern/science/computing/birth-web" rel="noopener">CERN – The birth of the Web</a></li><li><a href="https://www.w3.org/" rel="noopener">W3C</a></li><li><a href="https://developer.mozilla.org/" rel="noopener">MDN Web Docs</a></li><li><a href="https://www.internetsociety.org/internet/history-internet/brief-history-internet/" rel="noopener">Internet Society – Brief History of the Internet</a></li><li><a href="https://www.cloudflare.com/learning/" rel="noopener">Cloudflare Learning Center</a></li></ul></div>
+<div class="row noprint"><button class="btn navy" onclick="window.print()">اطبع الملخص 🖨️</button><button class="btn" id="share">شارك الموقع</button></div>
+<div class="noprint" style="margin-top:20px"><h3>QR Code</h3><p>الرابط:</p><input id="qrIn" aria-label="رابط الموقع"><div style="margin-top:12px"><div id="qr"></div></div><p id="qrMsg" style="font-size:16px"></p></div></div></section>
+</main>
+<footer><p>خلف الشاشة · رحلة تفاعلية في عالم الإنترنت ومواقع الويب</p></footer>
+<button id="toTop" aria-label="للأعلى">↑</button><div id="toast" role="status"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="videos.config.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.i);toast.i=setTimeout(()=>t.style.display='none',2500)}
+// nav
+$('#menuBtn').onclick=e=>{const o=$('#menu').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',o)};
+$$('#menu a').forEach(a=>a.onclick=()=>$('#menu').classList.remove('open'));
+addEventListener('scroll',()=>$('#toTop').style.display=scrollY>600?'block':'none');$('#toTop').onclick=()=>scrollTo({top:0});
+// hero network
+(()=>{const c=$('#net'),x=c.getContext('2d');let w,h,P=[];const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function rs(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;P=Array.from({length:Math.min(60,w/18|0)},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4}))}
+function f(){x.clearRect(0,0,w,h);P.forEach((p,i)=>{if(!rm){p.x+=p.vx;p.y+=p.vy}if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+for(let j=i+1;j<P.length;j++){const q=P[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<150){x.strokeStyle='rgba(139,175,208,'+(1-d/150)*.5+')';x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}
+x.fillStyle=i%5?'#8BAFD0':'#D5B77A';x.beginPath();x.arc(p.x,p.y,2.5,0,7);x.fill()});if(!rm)requestAnimationFrame(f)}
+addEventListener('resize',rs);rs();f()})();
+// timeline
+const TL=[['1969','ARPANET','🖧','أول اتصال بين حاسوبين في شبكة ARPANET (جامعة UCLA ومعهد SRI)، بتمويل وكالة ARPA الأمريكية.','بدأت فكرة ربط الحواسيب في شبكة واحدة وتبادل البيانات على شكل حزم.'],
+['1983','TCP/IP','🔗','اعتمدت ARPANET بروتوكول TCP/IP كلغة مشتركة بين الشبكات.','بقى ممكن لأي شبكة تتواصل مع غيرها، وهنا اتشكّل الإنترنت كـ«شبكة الشبكات».'],
+['1989','اقتراح World Wide Web','💡','Tim Berners-Lee في CERN اقترح نظامًا لمشاركة المعلومات بين العلماء عبر روابط.','ظهرت الأفكار الأساسية: HTML وURL وHTTP.'],
+['1991','أول موقع ويب','🌐','أول موقع ويب أُتيح لمن هم خارج CERN، وبعدها أتاحت CERN التقنية للجميع مجانًا (1993).','الويب خلّى الإنترنت سهل لأي شخص يتصفح ويقرا.'],
+['2000s','انتشار Web 2.0','💬','بدأ المستخدمون ينشئون المحتوى: شبكات اجتماعية ومنصات فيديو وتعليقات.','الإنترنت بقى مساحة للمشاركة مش للقراءة بس.'],
+['اليوم','Mobile Internet & AI','📱','الهواتف الذكية (من 2007 تقريبًا) وضعت الإنترنت في الجيب، وبدأ AI يدخل التطبيقات.','خدمات أسرع وأذكى، ومسؤولية أكبر في الأمان والتحقق.']];
+TL.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t[0];b.setAttribute('aria-pressed',i==0);b.onclick=()=>show(i);$('#tlBtns').append(b)});
+function show(i){$$('#tlBtns button').forEach((b,k)=>b.setAttribute('aria-pressed',k==i));const t=TL[i];$('#tlOut').innerHTML=`<div class="ic" aria-hidden="true">${t[2]}</div><div><h3>${t[0]} – ${t[1]}</h3><p>${t[3]}</p><p><b>الأثر:</b> ${t[4]}</p></div>`}show(0);
+// journey
+const J=[['⌨️','تكتب العنوان','بتكتب عنوان الموقع مثل youtube.com.'],['🧭','المتصفح (Browser)','المتصفح بيستقبل العنوان ويجهّز الطلب.'],['📖','DNS','بيدور على عنوان الـIP، زي دليل العناوين.'],['📨','Request للسيرفر','الطلب بيوصل للـServer على عنوانه.'],['⚙️','السيرفر يعالج','السيرفر بيفهم الطلب وبيجهّز الرد.'],['🗄️','Database','لو محتاج بيانات (حسابك مثلاً) بيسأل قاعدة البيانات.'],['📦','Response يرجع','الرد والملفات بترجع للمتصفح.'],['🖥️','الصفحة تظهر','المتصفح يجمع الملفات ويعرض الصفحة.']];
+$('#flow').innerHTML=J.map((j,i)=>`<div class="node"><span aria-hidden="true">${j[0]}</span>${i+1}. ${j[1]}</div>`).join('');
+let jt;$('#play').onclick=()=>{clearInterval(jt);const N=$$('.node');N.forEach(n=>n.className='node');let i=0;const step=()=>{N.forEach((n,k)=>n.className='node'+(k<i?' done':k==i?' on':''));$('#jText').textContent=`${i+1}. ${J[i][1]}: ${J[i][2]}`;if(++i>J.length){clearInterval(jt);N.forEach(n=>n.className='node done');$('#jText').textContent='✅ كل ده حصل في أجزاء من الثانية!'}};step();jt=setInterval(step,matchMedia('(prefers-reduced-motion:reduce)').matches?1500:1800)};
+// parts
+const PT=[['🧱','HTML','هيكل الموقع','لغة بتحدد العناصر: عنوان، فقرة، صورة، زر.','<h1> للعنوان و<p> للفقرة.'],['🎨','CSS','التصميم','بتحدد الألوان والخطوط والتنسيق.','تخلّي الزر ذهبي وبحواف مدورة.'],['⚡','JavaScript','التفاعل','بتخلي الصفحة تتصرف لما تضغط أو تكتب.','فتح قائمة أو التأكد من الإيميل قبل الإرسال.'],['🧠','Backend','المعالجة','منطق بيشتغل على السيرفر ومش بنشوفه.','التأكد من كلمة المرور قبل الدخول.'],['🗄️','Database','تخزين البيانات','مكان منظم لحفظ المعلومات.','حسابات المستخدمين والمنتجات.'],['☁️','Hosting','استضافة الموقع','خدمة بتحتفظ بملفات الموقع على سيرفر شغال طول الوقت.','بدونها محدش هيقدر يفتح موقعك.']];
+$('#partsGrid').innerHTML=PT.map(p=>`<button class="card tile" aria-expanded="false"><span style="font-size:36px" aria-hidden="true">${p[0]}</span><b>${p[1]} – ${p[2]}</b>اضغط للتفاصيل<span class="more"><br>${p[3]}<br><b>مثال:</b> ${p[4]}</span></button>`).join('');
+$$('.tile').forEach(t=>t.onclick=()=>t.setAttribute('aria-expanded',t.getAttribute('aria-expanded')!='true'));
+let lv=1;$$('.tabs button').forEach(b=>b.onclick=()=>{lv=+b.dataset.l;$$('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x==b));$('#demo').className=lv>1?'css':'';$('#demoOut').textContent=''});
+$('#demoBtn').onclick=()=>{$('#demoOut').textContent=lv==3?'🎉 أهلاً! ده تفاعل JavaScript.':lv==2?'':'';if(lv<3)$('#demoOut').textContent='(من غير JavaScript الزر مبيعملش حاجة)'};
+// phishing
+const PH=[['جائزة','رسالة من: +20 1xx xxx xxxx','مبروك! كسبت موبايل جديد 🎁 اضغط خلال ساعة لاستلام الجائزة.','win-prize.example/claim',0,'جائزة مفاجئة ورابط غريب وضغط على الوقت.','لا تضغط، احذف الرسالة وبلّغ عنها.'],
+['تحديث بيانات','من: support@bank-secure.example','حسابك هيتوقف. حدّث بياناتك الآن من الرابط:','bank-secure-login.example',0,'تهديد بإيقاف الحساب ودومين مش دومين البنك الرسمي.','افتح تطبيق البنك الرسمي بنفسك أو اتصل بالرقم المكتوب على الكارت.'],
+['تسجيل دخول مزيف','رسالة على الماسنجر','شوف الصورة دي! سجّل دخولك الأول:','faceb00k-login.example',0,'الاسم فيه أرقام بدل الحروف (faceb00k) وبيطلب دخول من لينك.','افتح التطبيق أو الموقع الرسمي مباشرة، ولو الحساب اتسرق غيّر الباسورد.'],
+['رمز التحقق','رسالة واتساب من «صديق»','بالغلط بعتلك كود على موبايلك، ممكن تبعتهولي؟','',0,'رمز التحقق سري، وطلبه من حد هو طريقة لسرقة حسابك.','لا ترسل الرمز لأي شخص مهما كان، وبلّغ صاحبك بطريقة تانية.'],
+['إشعار رسمي','إشعار داخل التطبيق نفسه','تم تسجيل دخول جديد. لو إنت، متعملش حاجة. لو لا، غيّر كلمة المرور من إعدادات التطبيق.','',1,'مفيش رابط ولا طلب بيانات، وبيوجهك للإعدادات الداخلية.','تأكد من الإعدادات بنفسك. ده الأسلوب الصح.']];
+let pi=0;function ph(){const p=PH[pi];$('#phMsg').innerHTML=`<div class="from">${p[1]} · تحدي ${pi+1}/5</div><q>${p[2]}</q>${p[3]?`<span class="link">${p[3]}</span>`:''}`;$('#phFb').className='fb';$('#phNext').style.display='none';$$('#phBtns button').forEach(b=>b.disabled=false)}
+$$('#phBtns button').forEach(b=>b.onclick=()=>{const p=PH[pi],ok=(b.dataset.a=='safe')==!!p[4];$$('#phBtns button').forEach(x=>x.disabled=true);const f=$('#phFb');f.className='fb '+(ok?'ok':'bad');f.innerHTML=`<b>${ok?'✅ إجابة صحيحة!':'❌ مش دقيق.'}</b><br>علامات: ${p[5]}<br><b>التصرف الصحيح:</b> ${p[6]}`;$('#phNext').style.display='inline-block';$('#phNext').textContent=pi<4?'التالي':'ابدأ من جديد'});
+$('#phNext').onclick=()=>{pi=(pi+1)%5;ph()};ph();
+const RULES=['كلمات مرور قوية ومختلفة لكل حساب','فعّل التحقق بخطوتين','لا تضغط على الروابط المشبوهة','لا تشارك بياناتك أو رمز التحقق مع أي حد','حدّث التطبيقات والنظام','تحقق من مصدر الأخبار قبل المشاركة','اضبط إعدادات الخصوصية'];
+$('#rules').innerHTML=$('#rules').parentNode.nextElementSibling?RULES.map(r=>`<li>${r}</li>`).join(''):'';
+// quiz
+const TF=['صح','خطأ'];
+const Q=[['التاريخ','سهل','ARPANET بدأت سنة:',['1969','1983','1991','2007'],0,'أول اتصال كان في أكتوبر 1969.'],
+['الويب','سهل','الإنترنت والويب نفس الشيء.',TF,1,'الإنترنت شبكة، والويب خدمة تعمل عليها.'],
+['التاريخ','متوسط','اعتمدت ARPANET بروتوكول TCP/IP سنة 1983.',TF,0,'صح، وده وحّد الاتصال بين الشبكات.'],
+['الويب','سهل','مين اقترح الـWorld Wide Web في CERN؟',['Tim Berners-Lee','Steve Jobs','Bill Gates','Mark Zuckerberg'],0,'اقترحه سنة 1989.'],
+['التقنية','سهل','وظيفة DNS:',['تحويل اسم الموقع لعنوان IP','تصميم الصفحة','تخزين الصور','حماية الباسورد'],0,'زي دليل العناوين.'],
+['التقنية','سهل','HTML مسؤولة عن:',['هيكل الصفحة','ألوان الصفحة','معالجة الطلبات','الاستضافة'],0,'HTML هي الهيكل.'],
+['التقنية','متوسط','CSS مسؤولة عن التصميم والألوان.',TF,0,'CSS = المظهر والتنسيق.'],
+['التقنية','متوسط','الـHosting هو:',['خدمة تحفظ ملفات الموقع على سيرفر','اسم الموقع','متصفح','كلمة سر'],0,'من غير استضافة الموقع مش بيتفتح.'],
+['الويب','صعب','Web 3.0 مصطلح موحد ومتفق عليه بالكامل.',TF,1,'بيُستخدم لأفكار متعددة وليس مرحلة موحدة.'],
+['الأمان','سهل','رسالة بتقول «كسبت جائزة، اضغط الآن» غالبًا:',['تصيد إلكتروني','خبر سار','من متجر رسمي','آمنة'],0,'جائزة مفاجئة وضغط على الوقت من علامات التصيد.'],
+['الأمان','سهل','التحقق بخطوتين يزيد حماية الحساب.',TF,0,'خطوة إضافية بعد كلمة المرور.'],
+['الأمان','متوسط','حد طلب منك رمز التحقق اللي وصلك. تعمل إيه؟',['ترفض وتبلّغ','تبعته لو صديق','تبعت نصه','تنشره'],0,'الرمز سري دائمًا.'],
+['الأمان','صعب','المواقع الجيدة بتخزن كلمات المرور كنص مكشوف.',TF,1,'بتخزن بصمة مشفرة (Hash).'],
+['AI','متوسط','الذكاء الاصطناعي ممكن يخطئ.',TF,0,'لازم نتحقق من مخرجاته.'],
+['الويب','صعب','Google هو:',['محرك بحث','متصفح','سيرفر استضافة','نظام تشغيل'],0,'Chrome متصفح وGoogle Search محرك بحث.']];
+let qi,sc,wrong,ans;
+function qStart(){qi=0;sc=0;wrong={};qShow()}
+function qShow(){const q=Q[qi];ans=false;$('#qBox').innerHTML=`<div>سؤال ${qi+1} من ${Q.length} · ${q[1]} · الدرجة: <b>${sc}</b></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${Q.length}" aria-valuenow="${qi}"><i style="width:${qi/Q.length*100}%"></i></div><h3>${q[2]}</h3><div class="opts">${q[3].map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="fb" id="qFb" aria-live="polite"></div><div class="row"><button class="btn" id="qNext" style="display:none">${qi<Q.length-1?'التالي':'شوف النتيجة'}</button></div>`;
+$$('.opt').forEach(b=>b.onclick=()=>{if(ans)return;ans=true;const i=+b.dataset.i,ok=i==q[4];if(ok)sc++;else wrong[q[0]]=(wrong[q[0]]||0)+1;$$('.opt').forEach((o,k)=>{o.disabled=true;if(k==q[4])o.classList.add('right');else if(k==i)o.classList.add('wrong')});const f=$('#qFb');f.className='fb '+(ok?'ok':'bad');f.textContent=(ok?'✅ صح! ':'❌ غلط. ')+q[5];$('#qNext').style.display='inline-block';$('#qNext').focus()});
+$('#qNext').onclick=()=>{++qi<Q.length?qShow():qEnd()}}
+function qEnd(){const p=Math.round(sc/Q.length*100),m=p>=90?'🌟 ممتاز! فاهم خلف الشاشة':p>=70?'👏 جيد جدًا':p>=50?'🙂 كويس، راجع شوية':'📚 ابدأ بمراجعة بسيطة وجرّب تاني',w=Object.entries(wrong).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+$('#qBox').innerHTML=`<div style="text-align:center"><div class="big" style="margin:0">${p}%</div><p>${sc} من ${Q.length} · ${m}</p><p>${w.length?'موضوعات للمراجعة: <b>'+w.join('، ')+'</b>':'مفيش موضوعات محتاجة مراجعة 👏'}</p><div class="row" style="justify-content:center"><button class="btn navy" id="qAgain">أعد الاختبار</button><button class="btn" id="qShare">شارك نتيجتك</button></div></div>`;
+$('#qAgain').onclick=qStart;$('#qShare').onclick=()=>shareIt(`جبت ${p}% في اختبار «خلف الشاشة»! جرّب انت كمان:`)}
+qStart();
+// videos
+$('#vGrid').innerHTML=(window.VIDEOS||[]).map((v,i)=>`<button class="card vid" data-i="${i}"><div class="th"><span aria-hidden="true">▶</span>${v.duration?`<small>${v.duration}</small>`:''}</div><div class="b"><b>${v.title}</b><br>${v.desc}${v.url?'':'<br><small>🕒 قريبًا</small>'}</div></button>`).join('');
+$$('.vid').forEach(b=>b.onclick=()=>{const v=VIDEOS[b.dataset.i],d=$('#vDlg');$('#vBody').innerHTML=!v.url?`<h3>${v.title}</h3><p>الفيديو قريبًا 🎬</p>`:/\.(mp4|webm)$/i.test(v.url)?`<video controls src="${v.url}"></video>`:`<iframe src="${v.url}" title="${v.title}" allowfullscreen loading="lazy"></iframe>`;d.showModal()});
+const stopV=()=>{$('#vBody').innerHTML='';$('#vDlg').close()};$('#vClose').onclick=stopV;$('#vDlg').addEventListener('close',()=>$('#vBody').innerHTML='');
+// summary
+$('#sum10').innerHTML=['الإنترنت شبكة عالمية تربط الأجهزة','ARPANET بدأت سنة 1969','TCP/IP اعتُمد 1983','Tim Berners-Lee اقترح الويب 1989','أول موقع ويب أُتيح 1991','الويب خدمة على الإنترنت وليس الإنترنت نفسه','DNS يحوّل الاسم لعنوان IP','HTML هيكل وCSS شكل وJS تفاعل','Web 3.0 مصطلح متعدد المعاني','الأمان الرقمي مسؤوليتنا والاستخدام المتوازن أهم'].map(x=>`<li>${x}</li>`).join('');
+$('#terms').innerHTML=[['Browser','برنامج نفتح به المواقع'],['Server','جهاز يقدم الخدمات والبيانات'],['Database','مكان منظم لتخزين البيانات'],['Domain','اسم الموقع'],['Hosting','استضافة ملفات الموقع'],['DNS','يحوّل الاسم لعنوان IP'],['Phishing','تصيد إلكتروني']].map(t=>`<dt><b>${t[0]}</b></dt><dd style="margin:0 0 6px">${t[1]}</dd>`).join('');
+$('#rules').innerHTML=RULES.map(r=>`<li>${r}</li>`).join('');
+const rules2=document.createElement('ol');
+// share + QR
+const SITE=()=>(window.SITE_URL||location.href.split('#')[0]);
+async function shareIt(text){const d={title:'خلف الشاشة',text:text||'رحلة تفاعلية في عالم الإنترنت',url:SITE()};try{if(navigator.share){await navigator.share(d);return}await navigator.clipboard.writeText(d.text+' '+d.url);toast('تم نسخ الرابط ✅')}catch(e){if(e.name!='AbortError')toast('انسخ الرابط يدويًا من الأعلى')}}
+$('#share').onclick=()=>shareIt();
+function qr(){const u=$('#qrIn').value.trim(),b=$('#qr');b.innerHTML='';if(!/^https?:\/\//.test(u)){$('#qrMsg').textContent='أدخل رابطًا يبدأ بـ https://';return}
+if(!window.QRCode){$('#qrMsg').textContent='تعذّر تحميل مكتبة QR (تحتاج اتصال بالإنترنت).';return}new QRCode(b,{text:u,width:180,height:180,colorDark:'#23344D',colorLight:'#ffffff'});$('#qrMsg').textContent=location.protocol=='file:'&&!window.SITE_URL?'تنبيه: ده رابط ملف محلي. بعد النشر ضع الرابط النهائي هنا.':''}
+$('#qrIn').value=SITE();$('#qrIn').oninput=qr;addEventListener('load',qr);
+</script>
+</body></html>
